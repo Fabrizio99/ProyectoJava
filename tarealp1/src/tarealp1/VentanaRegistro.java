@@ -1,5 +1,6 @@
 package tarealp1;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -15,10 +16,7 @@ public class VentanaRegistro extends javax.swing.JFrame {
     
     public VentanaRegistro() {
         initComponents();
-        if(grupoFutbolistas.isEmpty()){
-            btnEditar.setEnabled(false);
-            btnEliminar.setEnabled(false);
-        }
+        validarCantidadFutbolistas();
         deshabilitarCampos();
         listaActualizada();
     }
@@ -99,6 +97,11 @@ public class VentanaRegistro extends javax.swing.JFrame {
                 campoNombreActionPerformed(evt);
             }
         });
+        campoNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoNombreKeyTyped(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Apellidos");
@@ -107,6 +110,11 @@ public class VentanaRegistro extends javax.swing.JFrame {
         campoApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoApellidoActionPerformed(evt);
+            }
+        });
+        campoApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoApellidoKeyTyped(evt);
             }
         });
 
@@ -119,6 +127,11 @@ public class VentanaRegistro extends javax.swing.JFrame {
                 campoIDActionPerformed(evt);
             }
         });
+        campoID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoIDKeyTyped(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setText("Edad");
@@ -127,6 +140,11 @@ public class VentanaRegistro extends javax.swing.JFrame {
         campoEdad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoEdadActionPerformed(evt);
+            }
+        });
+        campoEdad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoEdadKeyTyped(evt);
             }
         });
 
@@ -139,6 +157,11 @@ public class VentanaRegistro extends javax.swing.JFrame {
                 campoDorsalActionPerformed(evt);
             }
         });
+        campoDorsal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoDorsalKeyTyped(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setText("Demarcación");
@@ -147,6 +170,11 @@ public class VentanaRegistro extends javax.swing.JFrame {
         campoDemarcacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoDemarcacionActionPerformed(evt);
+            }
+        });
+        campoDemarcacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoDemarcacionKeyTyped(evt);
             }
         });
 
@@ -396,6 +424,12 @@ public class VentanaRegistro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void validarCantidadFutbolistas(){
+        if(grupoFutbolistas.isEmpty()){
+            btnEditar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+        }
+    }
     public void listaActualizada(){
         cmbEntrenador.removeAllItems();
         cmbEntrenador.addItem("");
@@ -514,7 +548,6 @@ public class VentanaRegistro extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if(btnGuardar.getText().equals("Agregar")){
-            //listaActualizada();
             btnGuardar.setText("Guardar");
             habilitarCampos();
         }else{
@@ -523,20 +556,27 @@ public class VentanaRegistro extends javax.swing.JFrame {
                 || cmbEntrenador.getSelectedIndex()==0 ||cmbMasajista.getSelectedIndex()==0||cmbLugar.getSelectedIndex()==0){
                 JOptionPane.showMessageDialog(null, "Llene todo el formulario");
             }else{
-                Futbolista nuevoFutbolista=new Futbolista(Integer.parseInt(campoID.getText()), campoNombre.getText(), campoApellido.getText(), Integer.parseInt(campoEdad.getText()),Integer.parseInt(campoDorsal.getText()) , campoDemarcacion.getText());
-                grupoFutbolistas.add(nuevoFutbolista);
-                listaLugares.add(cmbLugar.getSelectedItem().toString());
-                listaEntrenadores.add(cmbEntrenador.getSelectedItem().toString());
-                listaMasajista.add(cmbMasajista.getSelectedItem().toString());
-                JOptionPane.showMessageDialog(null, "El jugador "+nuevoFutbolista.getNombre()+", tiene como entrenador a "+cmbEntrenador.getSelectedItem()+", le toca el masaje con "+cmbMasajista.getSelectedItem()+" y debe viajar a "+cmbLugar.getSelectedItem());
-                modelo.addElement(patronMensaje(grupoFutbolistas.size()-1));
-                lista.setModel(modelo);
-                btnEditar.setEnabled(true);
-                btnEliminar.setEnabled(true);
-                resetearCampos();
-                btnGuardar.setText("Agregar");
-                deshabilitarCampos();
-                System.out.println(lista.getModel().getSize());
+                if(Principal.validarRegistroID(campoID.getText())){
+                    JOptionPane.showMessageDialog(null, "Ya existe una persona con ese DNI");
+                }else if(Principal.validarLongitudID(campoID.getText())){
+                    JOptionPane.showMessageDialog(null, "Longitud del DNI debe ser de 8 digitos.");
+                }else{
+                    Futbolista nuevoFutbolista=new Futbolista(Integer.parseInt(campoID.getText()), campoNombre.getText(), campoApellido.getText(), Integer.parseInt(campoEdad.getText()),Integer.parseInt(campoDorsal.getText()) , campoDemarcacion.getText());
+                    grupoFutbolistas.add(nuevoFutbolista);
+                    Principal.registroID.add(campoID.getText());
+                    listaLugares.add(cmbLugar.getSelectedItem().toString());
+                    listaEntrenadores.add(cmbEntrenador.getSelectedItem().toString());
+                    listaMasajista.add(cmbMasajista.getSelectedItem().toString());
+                    JOptionPane.showMessageDialog(null, "El jugador "+nuevoFutbolista.getNombre()+", tiene como entrenador a "+cmbEntrenador.getSelectedItem()+", le toca el masaje con "+cmbMasajista.getSelectedItem()+" y debe viajar a "+cmbLugar.getSelectedItem());
+                    modelo.addElement(patronMensaje(grupoFutbolistas.size()-1));
+                    lista.setModel(modelo);
+                    btnEditar.setEnabled(true);
+                    btnEliminar.setEnabled(true);
+                    resetearCampos();
+                    btnGuardar.setText("Agregar");
+                    deshabilitarCampos();
+                }
+                
             }
         }
 
@@ -589,8 +629,39 @@ public class VentanaRegistro extends javax.swing.JFrame {
                 modelo.add(i,patronMensaje(i));
                 lista.setModel(modelo);
             }
+            validarCantidadFutbolistas();
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void campoNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNombreKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'a' || c>'z') && (c<'A' || c>'Z') && (c!=KeyEvent.VK_BACK_SPACE) && (c!=KeyEvent.VK_SPACE)) evt.consume();
+    }//GEN-LAST:event_campoNombreKeyTyped
+
+    private void campoApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoApellidoKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'a' || c>'z') && (c<'A' || c>'Z') && (c!=KeyEvent.VK_BACK_SPACE) && (c!=KeyEvent.VK_SPACE)) evt.consume();
+    }//GEN-LAST:event_campoApellidoKeyTyped
+
+    private void campoDemarcacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDemarcacionKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'a' || c>'z') && (c<'A' || c>'Z') && (c!=KeyEvent.VK_BACK_SPACE) && (c!=KeyEvent.VK_SPACE)) evt.consume();
+    }//GEN-LAST:event_campoDemarcacionKeyTyped
+
+    private void campoIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoIDKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'0' || c>'9') && c!=KeyEvent.VK_BACK_SPACE) evt.consume();
+    }//GEN-LAST:event_campoIDKeyTyped
+
+    private void campoEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoEdadKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'0' || c>'9') && c!=KeyEvent.VK_BACK_SPACE) evt.consume();
+    }//GEN-LAST:event_campoEdadKeyTyped
+
+    private void campoDorsalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDorsalKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'0' || c>'9') && c!=KeyEvent.VK_BACK_SPACE) evt.consume();
+    }//GEN-LAST:event_campoDorsalKeyTyped
 //int indice=0;
     /**
      * @param args the command line arguments

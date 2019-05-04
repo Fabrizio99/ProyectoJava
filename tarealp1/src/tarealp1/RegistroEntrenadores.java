@@ -1,5 +1,6 @@
 package tarealp1;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -23,7 +24,7 @@ public class RegistroEntrenadores extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         cmpApellido = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        cmpDNI = new javax.swing.JTextField();
+        cmpID = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         cmpEdad = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -63,17 +64,47 @@ public class RegistroEntrenadores extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Nombre");
 
+        cmpNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cmpNombreKeyTyped(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Apellido");
+
+        cmpApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cmpApellidoKeyTyped(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("DNI");
 
+        cmpID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cmpIDKeyTyped(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Edad");
 
+        cmpEdad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cmpEdadKeyTyped(evt);
+            }
+        });
+
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Federacion");
+
+        cmpFederacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cmpFederacionKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -86,7 +117,7 @@ public class RegistroEntrenadores extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4)
-                            .addComponent(cmpDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmpID, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmpNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(42, 42, 42)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,7 +147,7 @@ public class RegistroEntrenadores extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmpDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmpID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmpEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
@@ -184,7 +215,7 @@ public class RegistroEntrenadores extends javax.swing.JFrame {
     public void deshabilitarCampos(){
         cmpNombre.setEditable(false);
         cmpApellido.setEditable(false);
-        cmpDNI.setEditable(false);
+        cmpID.setEditable(false);
         cmpEdad.setEditable(false);
         cmpFederacion.setEditable(false);
     }
@@ -192,14 +223,14 @@ public class RegistroEntrenadores extends javax.swing.JFrame {
         cmpNombre.setEditable(true);
         cmpNombre.requestFocus();
         cmpApellido.setEditable(true);
-        cmpDNI.setEditable(true);
+        cmpID.setEditable(true);
         cmpEdad.setEditable(true);
         cmpFederacion.setEditable(true);
     }
     public void resetearCampos(){
         cmpNombre.setText("");
         cmpApellido.setText("");
-        cmpDNI.setText("");
+        cmpID.setText("");
         cmpEdad.setText("");
         cmpFederacion.setText("");
     }
@@ -208,15 +239,23 @@ public class RegistroEntrenadores extends javax.swing.JFrame {
             habilitarCampos();
             btnRegistrar.setText("Guardar");
         }else{
-            if(cmpNombre.getText().equals("") || cmpApellido.getText().equals("") ||cmpEdad.getText().equals("") ||cmpDNI.getText().equals("") ||cmpFederacion.getText().equals("")){
+            if(cmpNombre.getText().equals("") || cmpApellido.getText().equals("") ||cmpEdad.getText().equals("") ||cmpID.getText().equals("") ||cmpFederacion.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Llene todo el formulario");
             }else{
-                Entrenador nuevoEntrenador = new Entrenador(Integer.parseInt(cmpDNI.getText()), cmpNombre.getText(), cmpApellido.getText(), Integer.parseInt(cmpEdad.getText()), cmpFederacion.getText());
-                listaEntrenadores.add(nuevoEntrenador);
-                JOptionPane.showMessageDialog(null, "Entrenador Registrado");
-                resetearCampos();
-                deshabilitarCampos();
-                btnRegistrar.setText("Registrar");
+                if(Principal.validarRegistroID(cmpID.getText())){
+                    JOptionPane.showMessageDialog(null, "Ya existe una persona con ese DNI");
+                }else if(Principal.validarLongitudID(cmpID.getText())){
+                    JOptionPane.showMessageDialog(null, "Longitud del DNI debe ser de 8 digitos.");
+                }else{
+                    Entrenador nuevoEntrenador = new Entrenador(Integer.parseInt(cmpID.getText()), cmpNombre.getText(), cmpApellido.getText(), Integer.parseInt(cmpEdad.getText()), cmpFederacion.getText());
+                    Principal.registroID.add(cmpID.getText());
+                    listaEntrenadores.add(nuevoEntrenador);
+                    JOptionPane.showMessageDialog(null, "Entrenador Registrado");
+                    resetearCampos();
+                    deshabilitarCampos();
+                    btnRegistrar.setText("Registrar");
+                }
+                
             }
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -225,13 +264,39 @@ public class RegistroEntrenadores extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
+    private void cmpNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmpNombreKeyTyped
+        // TODO add your handling code here:
+        char c=evt.getKeyChar();
+        if((c<'a' || c>'z') && (c<'A' || c>'Z') && (c!=KeyEvent.VK_BACK_SPACE) && (c!=KeyEvent.VK_SPACE)) evt.consume();
+    }//GEN-LAST:event_cmpNombreKeyTyped
+
+    private void cmpIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmpIDKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'0' || c>'9') && c!=KeyEvent.VK_BACK_SPACE) evt.consume();
+    }//GEN-LAST:event_cmpIDKeyTyped
+
+    private void cmpEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmpEdadKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'0' || c>'9') && c!=KeyEvent.VK_BACK_SPACE) evt.consume();
+    }//GEN-LAST:event_cmpEdadKeyTyped
+
+    private void cmpApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmpApellidoKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'a' || c>'z') && (c<'A' || c>'Z') && (c!=KeyEvent.VK_BACK_SPACE) && (c!=KeyEvent.VK_SPACE)) evt.consume();
+    }//GEN-LAST:event_cmpApellidoKeyTyped
+
+    private void cmpFederacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmpFederacionKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'a' || c>'z') && (c<'A' || c>'Z') && (c!=KeyEvent.VK_BACK_SPACE) && (c!=KeyEvent.VK_SPACE)) evt.consume();
+    }//GEN-LAST:event_cmpFederacionKeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
     public static javax.swing.JButton btnRegistrar;
     public static javax.swing.JTextField cmpApellido;
-    public static javax.swing.JTextField cmpDNI;
     public static javax.swing.JTextField cmpEdad;
     public static javax.swing.JTextField cmpFederacion;
+    public static javax.swing.JTextField cmpID;
     public static javax.swing.JTextField cmpNombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -1,5 +1,6 @@
 package tarealp1;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -27,7 +28,7 @@ public class RegistroMasajista extends javax.swing.JFrame {
         cmpApellido = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        cmpDNI = new javax.swing.JTextField();
+        cmpID = new javax.swing.JTextField();
         cmpEdad = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -76,8 +77,20 @@ public class RegistroMasajista extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Nombre");
 
+        cmpNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cmpNombreKeyTyped(evt);
+            }
+        });
+
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Apellido");
+
+        cmpApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cmpApellidoKeyTyped(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("DNI");
@@ -85,9 +98,20 @@ public class RegistroMasajista extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Edad");
 
-        cmpDNI.addActionListener(new java.awt.event.ActionListener() {
+        cmpID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmpDNIActionPerformed(evt);
+                cmpIDActionPerformed(evt);
+            }
+        });
+        cmpID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cmpIDKeyTyped(evt);
+            }
+        });
+
+        cmpEdad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cmpEdadKeyTyped(evt);
             }
         });
 
@@ -96,6 +120,18 @@ public class RegistroMasajista extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Titulacion");
+
+        cmpAnios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cmpAniosKeyTyped(evt);
+            }
+        });
+
+        cmpTitulacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cmpTitulacionKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -108,7 +144,7 @@ public class RegistroMasajista extends javax.swing.JFrame {
                     .addComponent(cmpNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel7)
-                    .addComponent(cmpDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmpID, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmpAnios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +173,7 @@ public class RegistroMasajista extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmpDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmpID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmpEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -209,7 +245,7 @@ public class RegistroMasajista extends javax.swing.JFrame {
     public void deshabilitarCampos(){
         cmpNombre.setEditable(false);
         cmpApellido.setEditable(false);
-        cmpDNI.setEditable(false);
+        cmpID.setEditable(false);
         cmpEdad.setEditable(false);
         cmpAnios.setEditable(false);
         cmpTitulacion.setEditable(false);
@@ -218,7 +254,7 @@ public class RegistroMasajista extends javax.swing.JFrame {
         cmpNombre.setEditable(true);
         cmpNombre.requestFocus();
         cmpApellido.setEditable(true);
-        cmpDNI.setEditable(true);
+        cmpID.setEditable(true);
         cmpEdad.setEditable(true);
         cmpAnios.setEditable(true);
         cmpTitulacion.setEditable(true);
@@ -226,29 +262,36 @@ public class RegistroMasajista extends javax.swing.JFrame {
     public void resetearCampos(){
         cmpNombre.setText("");
         cmpApellido.setText("");
-        cmpDNI.setText("");
+        cmpID.setText("");
         cmpEdad.setText("");
         cmpAnios.setText("");
         cmpTitulacion.setText("");
     }
-    private void cmpDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmpDNIActionPerformed
+    private void cmpIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmpIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmpDNIActionPerformed
+    }//GEN-LAST:event_cmpIDActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         if(btnRegistrar.getText().equals("Registrar")){
             habilitarCampos();
             btnRegistrar.setText("Guardar");
         }else{
-            if(cmpNombre.getText().equals("") || cmpApellido.getText().equals("") ||cmpEdad.getText().equals("") ||cmpDNI.getText().equals("") ||cmpAnios.getText().equals("") || cmpTitulacion.getText().equals("")){
+            if(cmpNombre.getText().equals("") || cmpApellido.getText().equals("") ||cmpEdad.getText().equals("") ||cmpID.getText().equals("") ||cmpAnios.getText().equals("") || cmpTitulacion.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Llene todo el formulario");
             }else{
-                Masajista nuevoMasajista = new Masajista(Integer.parseInt(cmpDNI.getText()), cmpNombre.getText(), cmpApellido.getText(), Integer.parseInt(cmpEdad.getText()), cmpTitulacion.getText(), Integer.parseInt(cmpAnios.getText()));
-                listaMasajistas.add(nuevoMasajista);
-                JOptionPane.showMessageDialog(null, "Masajista Registrado");
-                resetearCampos();
-                deshabilitarCampos();
-                btnRegistrar.setText("Registrar");
+                if(Principal.validarRegistroID(cmpID.getText())){
+                    JOptionPane.showMessageDialog(null, "Ya existe una persona con ese DNI");
+                }else if(Principal.validarLongitudID(cmpID.getText())){
+                    JOptionPane.showMessageDialog(null, "Longitud del DNI debe ser de 8 digitos.");
+                }else{
+                    Masajista nuevoMasajista = new Masajista(Integer.parseInt(cmpID.getText()), cmpNombre.getText(), cmpApellido.getText(), Integer.parseInt(cmpEdad.getText()), cmpTitulacion.getText(), Integer.parseInt(cmpAnios.getText()));
+                    Principal.registroID.add(cmpID.getText());
+                    listaMasajistas.add(nuevoMasajista);
+                    JOptionPane.showMessageDialog(null, "Masajista Registrado");
+                    resetearCampos();
+                    deshabilitarCampos();
+                    btnRegistrar.setText("Registrar");
+                }
             }
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -257,13 +300,43 @@ public class RegistroMasajista extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAtrasActionPerformed
 
+    private void cmpNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmpNombreKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'a' || c>'z') && (c<'A' || c>'Z') && (c!=KeyEvent.VK_BACK_SPACE) && (c!=KeyEvent.VK_SPACE)) evt.consume();
+    }//GEN-LAST:event_cmpNombreKeyTyped
+
+    private void cmpApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmpApellidoKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'a' || c>'z') && (c<'A' || c>'Z') && (c!=KeyEvent.VK_BACK_SPACE) && (c!=KeyEvent.VK_SPACE)) evt.consume();
+    }//GEN-LAST:event_cmpApellidoKeyTyped
+
+    private void cmpTitulacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmpTitulacionKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'a' || c>'z') && (c<'A' || c>'Z') && (c!=KeyEvent.VK_BACK_SPACE) && (c!=KeyEvent.VK_SPACE)) evt.consume();
+    }//GEN-LAST:event_cmpTitulacionKeyTyped
+
+    private void cmpIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmpIDKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'0' || c>'9') && c!=KeyEvent.VK_BACK_SPACE) evt.consume();
+    }//GEN-LAST:event_cmpIDKeyTyped
+
+    private void cmpEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmpEdadKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'0' || c>'9') && c!=KeyEvent.VK_BACK_SPACE) evt.consume();
+    }//GEN-LAST:event_cmpEdadKeyTyped
+
+    private void cmpAniosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmpAniosKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'0' || c>'9') && c!=KeyEvent.VK_BACK_SPACE) evt.consume();
+    }//GEN-LAST:event_cmpAniosKeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnRegistrar;
     public static javax.swing.JTextField cmpAnios;
     public static javax.swing.JTextField cmpApellido;
-    public static javax.swing.JTextField cmpDNI;
     public static javax.swing.JTextField cmpEdad;
+    public static javax.swing.JTextField cmpID;
     public static javax.swing.JTextField cmpNombre;
     public static javax.swing.JTextField cmpTitulacion;
     private javax.swing.JLabel jLabel1;

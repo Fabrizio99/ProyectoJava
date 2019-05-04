@@ -1,6 +1,27 @@
 package tarealp1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Principal extends javax.swing.JFrame {
+    public static List <String> registroID = new ArrayList<>();
+    public static boolean validarRegistroID(String ID){
+        boolean validador=false;
+        for (int i = 0; i < registroID.size(); i++) {
+            if(ID.equals(registroID.get(i))){
+                validador=true;
+                break;
+            }
+        }
+        return validador;
+    }
+    public static boolean validarLongitudID(String ID){
+        boolean validador=false;
+        if(ID.length()!=8){
+            validador=true;
+        }
+        return validador;
+    }
     public Principal() {
         initComponents();
     }
@@ -75,11 +96,11 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
