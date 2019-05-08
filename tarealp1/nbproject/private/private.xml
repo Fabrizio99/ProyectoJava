@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/fabri/Documents/NetBeansProjects/tarealp1/src/tarealp1/Principal.java</file>
-            <file>file:/C:/Users/fabri/Documents/NetBeansProjects/tarealp1/src/tarealp1/VentanaRegistro.java</file>
-            <file>file:/C:/Users/fabri/Documents/NetBeansProjects/tarealp1/src/tarealp1/RegistroEntrenadores.java</file>
-            <file>file:/C:/Users/fabri/Documents/NetBeansProjects/tarealp1/src/tarealp1/RegistroMasajista.java</file>
+            <file>file:/C:/Users/fabri/Documents/NetBeansProjects/tarealp1/src/tarealp1/VentanaRegistroMasajista.java</file>
+            <file>file:/C:/Users/fabri/Documents/NetBeansProjects/tarealp1/src/tarealp1/VentanaPrincipal.java</file>
+            <file>file:/C:/Users/fabri/Documents/NetBeansProjects/tarealp1/src/tarealp1/VentanaRegistroEntrenadores.java</file>
+            <file>file:/C:/Users/fabri/Documents/NetBeansProjects/tarealp1/src/tarealp1/Tarealp1.java</file>
+            <file>file:/C:/Users/fabri/Documents/NetBeansProjects/tarealp1/src/tarealp1/VentanaRegistroFutbolista.java</file>
         </group>
     </open-files>
 </project-private>
